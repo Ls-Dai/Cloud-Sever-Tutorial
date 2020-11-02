@@ -20,7 +20,7 @@
 | Tesla P100 |  9.526 | 16 | 0.868 |
 <br>
 我们主要使用RTX2080的显卡助力计算，系统选择Ubuntu。
-![system select picture](src/img/system_choice.png)
+![system select picture](https://raw.githubusercontent.com/Ls-Dai/Cloud-Sever-Tutorial/main/src/img/system_choice.png)
 <br>
 <br>
 
