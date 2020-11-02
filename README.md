@@ -62,4 +62,24 @@ MobaXterm中除了ssh功能之外，也集成了很多丰富的辅助功能。�
 <br>
 
 ### 2.2 远程调试
-使用远程调试可以十分方便地“把服务器上的环境当成自己的环境一样用”。而调试功能也可以迅速对可能出现的问题进行定位。
+使用远程调试可以十分方便地“把服务器上的环境当成自己的环境一样用”。而调试功能也可以迅速对可能出现的问题进行定位。<br>
+目前几乎所有主流的IDE或者文本编辑器都支持远程开发功能。其中，绝大多数需要收费（这其中一般对开源工作者和教育工作者、学生免费）。以Pycharm为例，免费的社区版并不支持远程调试。<br>
+我们以开源软件 Visual Studio Code为例来说明远程调试如何工作。<br>
+```
+官方网站： https://code.visualstudio.com
+```
+首先，安装VScode软件。然后安装官方的python插件：
+<br>
+![Python Extension](src/img/Python_Extension.png)
+然后，安装远程调试相关插件：<br>
+![Remote Development](src/img/Remote_Development.png)
+<br>
+点击右下角的![Remote](src/img/Remote.png)，然后在弹出的对话框中选择 "Remote-SSH: Connect to Host..."<br>
+![Connect Selection](src/img/Connect_Selection.jpg)
+……选择新添加一个配置，会弹出要求输入用户名、IP地址和端口的对话框，以A534机器为例：<br>
+![SSH](src/img/ssh.jpg)
+<br>
+会弹出要求输入密码的对话框，输入密码后就可以成功连接上了。
+<br>
+现在需要打开对应的文件夹开始调试<br>
+![Explorer](src/img/Open_Folder.jpg)
