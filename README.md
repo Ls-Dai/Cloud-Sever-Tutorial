@@ -52,7 +52,7 @@
 <img src='src/img/MobaXterm.JPG' alt="MobaXterm">
 MobaXterm中除了ssh功能之外，也集成了很多丰富的辅助功能。其中比较重要的辅助功能有：远程服务器GUI连接、SFTP文件传输GUI及文件修改自动化。<br>
 <center class="half">
-    <img src="src/img/Remote GUI.png" width="50%"/><img src="src/img/MobaXterm Editor.png" width="50%"/>
+    <img src="src/img/Remote GUI.png" width="45%"/><img src="src/img/MobaXterm Editor.png" width="45%"/>
 </center>
 我们可以利用文件修改自动化功能直接更改远程服务器上的文件中的代码（原理是在SFTP协议下先把代码文件下载到本地，然后用自带的文本编辑器打开，修改完后再上传替换远程端源文件）。由于自带的文本编辑器仅能阅读和修改文件，缺少代码提示、高亮和调试功能等，所以这种方式只适合简单修改。可以先将代码在本地大体上跑通，然后放在服务器上做二次调试和运行。
 
