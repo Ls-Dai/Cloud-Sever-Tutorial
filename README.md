@@ -23,8 +23,11 @@
 
 #### 1.1.2 计费说明
 
-计费内容包含三项：开机计算，存储和传输带宽
-<br>
+计费内容包含三项：
+- 开机计算
+- 存储
+- 传输带宽
+
 下表中，虚拟金币和人民币兑换比例为：1：0.92
 
 |    项目    | 单位数量单位时间价格|
@@ -41,12 +44,13 @@
 <br>
 
 ## 2. 远程交互
-云主机创建之后，会获得:<br>
+云主机创建之后，会获得:（在“连接信息”中可以查看）<br>
 * 云主机的ip地址
 * 开放端口
 * 用户名和密码（用户身份，无管理员权限）
 
 云服务器已经为我们配置好了相关的应用。所以我们只需要利用这些信息，直接访问远程服务器即可。
+网页版自带终端界面和图形化界面应用，推荐作为简易使用的用途。
 <br>
 
 ### 2.1 MobaXTerm
@@ -83,3 +87,62 @@ MobaXterm中除了ssh功能之外，也集成了很多丰富的辅助功能。�
 <br>
 现在需要打开对应的文件夹开始调试<br>
 ![Explorer](src/img/Open_Folder.jpg)
+
+<br>
+<br>
+
+## 3. PyTorch并行计算（torch.nn.DataParallel）
+### 3.1 基本组成
+设置GPU并行计算只需要几个步骤即可<br>
+(1) 导入 torch.nn 库 <br>
+(2) 设置参与计算的GPU，是按照列表形式组织的。 `gpus = [0,1]` 表示 GPU 0 和 GPU 1 参与计算。<br>
+(3) 将模型加载到各个GPU上<br><br>
+对应代码：<br>
+
+```
+import torch.nn as nn
+``` 
+```
+gpus = [_ for _ in range(num_gpus)]
+```
+这里的num_gpus需要按照实际情况修改。
+<br>
+也可以用这个函数返回GPU数量代替num_gpus：
+```
+torch.cuda.device_count()
+```
+
+最后的parallel用法为：
+```
+model = nn.DataParallel(model.cuda(), device_ids=gpus, output_device=gpus[0]) 
+```
+其中，output_device不建议修改。
+<br>
+
+### 3.2 基本原理
+`torch.nn.DataParallel` 可以将模型发送到多个GPU上进行并行计算，每个GPU都有一个模型的副本。训练时，每一批 *(batch)* 的数据会被均匀地分配到所有GPU上进行处理，计算的梯度会被汇总到原始的模型中进行更新。
+<br>
+几个注意事项：<br>
+- 务必保证批的大小(batchsize)大于使用的GPU的数量。<br>
+- 在这个训练过程中，因为梯度会被汇总，所以不涉及改变批的大小(batchsize)的问题。<br>
+- 因为汇总梯度等原因，GPU(0)一般要被占用更多的显存。
+
+### 3.3 GPU 选择
+GPU编号有两类，PyTorch是根据显卡性能进行降序排序的，也就是说程序中调用的第一个GPU(cuda:0)一定是性能最强的。`nvidia-smi` 命令显示的显卡信息是按照总线的顺序进行排序的。
+
+<img src='src/img/nvidia-smi.png'>
+
+(1) 强制PyTorch使用总线顺序：
+```
+import os <br>
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+```
+(2) 使用一部分GPU进行计算:
+```
+import os
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2, 3"
+gpus = [0,1]
+model = nn.DataParallel(model.cuda(), device_ids=gpus, output_device=gpus[0]) 
+```
+这里指定了总线序号为2和3的两个GPU作为 `cuda:0` 和 `cuda:1` 。
