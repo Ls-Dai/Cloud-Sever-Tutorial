@@ -134,7 +134,7 @@ GPU编号有两类，PyTorch是根据显卡性能进行降序排序的，也就�
 
 (1) 强制PyTorch使用总线顺序：
 ```
-import os <br>
+import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
 ```
 (2) 使用一部分GPU进行计算:
