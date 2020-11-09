@@ -106,7 +106,8 @@ MobaXterm中除了ssh功能之外，也集成了很多丰富的辅助功能。�
 <br>
 <br>
 
-### 3.2[**](#comment1) 远程调试
+
+### <span id=goback> 3.2[**](#comment1) 远程调试 </span>
 使用远程调试可以十分方便地“把服务器上的环境当成自己的环境一样用”。而调试功能也可以迅速对可能出现的问题进行定位。<br>
 目前几乎所有主流的IDE或者文本编辑器都支持远程开发功能。其中，绝大多数需要收费（这其中一般对开源工作者和教育工作者、学生免费）。以Pycharm为例，免费的社区版并不支持远程调试。<br>
 我们以开源软件 Visual Studio Code为例来说明远程调试如何工作。<br>
@@ -191,4 +192,10 @@ model = nn.DataParallel(model.cuda(), device_ids=gpus, output_device=gpus[0])
 
 <br>
 <br>
-<span id=comment1>**</span>：此处内容仅作为便利性参考，建议忽略
+<span id=comment1>
+**
+</span>
+
+此处内容仅作为便利性参考，建议忽略。 
+[返回](#goback)
+
