@@ -188,7 +188,12 @@ gpus = [0,1]
 model = nn.DataParallel(model.cuda(), device_ids=gpus, output_device=gpus[0]) 
 ```
 这里指定了总线序号为2和3的两个GPU作为 `cuda:0` 和 `cuda:1` 。
+<br>
+<br>
+<br>
+***
 
+正文部分结束，如果需要具体了解云服务器的使用规则，请移步至[云服务器使用规则](Rules.md)。
 
 <br>
 <br>
