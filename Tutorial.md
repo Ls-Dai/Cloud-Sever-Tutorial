@@ -145,7 +145,7 @@ MobaXterm中除了ssh功能之外，也集成了很多丰富的辅助功能。�
 import torch.nn as nn
 ``` 
 ```
-gpus = [_ for _ in range(num_gpus)]
+gpus = range(num_gpus)
 ```
 这里的num_gpus需要按照实际情况修改。
 <br>
